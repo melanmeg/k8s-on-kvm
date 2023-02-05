@@ -1,9 +1,6 @@
 # k8s-on-kvm
 
-### ref: https://github.com/unchama/kube-cluster-on-proxmox
-
 ```
-
 # machine info
 
 Host k8s-cp-1
@@ -20,11 +17,9 @@ Host k8s-wk-2
   HostName 192.168.11.122
   User user
   IdentityFile ~/.ssh/id_ed25519
-
 ```
 
 ```
-
 .
 ├── git.sh
 └── k8s-on-kvm
@@ -43,5 +38,6 @@ Host k8s-wk-2
             └── root
                 ├── apps.yaml
                 └── projects.yaml
-
 ```
+
+### ref: https://github.com/unchama/kube-cluster-on-proxmox
