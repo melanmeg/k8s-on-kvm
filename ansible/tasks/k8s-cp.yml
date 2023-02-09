@@ -1,0 +1,60 @@
+- name: Copy ha-master.sh
+  copy:
+    src: "./files/k8s/ha-master.sh"
+    dest: ~/work/
+    mode: '0755'
+
+- name: Copy common.sh
+  copy:
+    src: "./files/k8s/common.sh"
+    dest: ~/work/
+    mode: '0755'
+
+- name: Copy setup.sh
+  copy:
+    src: "./files/k8s/setup.sh"
+    dest: ~/work/
+    mode: '0755'
+
+- name: Execute ha-master.sh
+  shell: bash ~/work/ha-master.sh
+
+- name: Execute common.sh
+  shell: bash ~/work/common.sh
+
+- name: Execute setup.sh
+  shell: bash ~/work/setup.sh
+
+- name: mv yaml
+  shell: mv ~/*.yaml ~/work
+
+- name: fetch joinfile cp
+  fetch:
+    src: "~/work/join_kubeadm_cp.yaml"
+    dest: "/root/work/ansible/files/k8s/fetch/"
+    flat: yes
+
+- name: fetch joinfile wk
+  fetch:
+    src: "~/work/join_kubeadm_wk.yaml"
+    dest: "/root/work/ansible/files/k8s/fetch/"
+    flat: yes
+
+- name: set bashrc
+  lineinfile:
+    dest: ~/.bashrc
+    insertafter: EOF
+    line: '{{ item }}'
+  with_items:
+  - source <(kubectl completion bash)
+  - alias k='kubectl'
+  - complete -F __start_kubectl k
+  - alias kcv='kubectl config view -o jsonpath='{.users[*].name}''
+  - alias kgn='kubectl get node -A'
+  - alias kgp='kubectl get pod -A'
+  - alias kgpw='kubectl get pod -A -o wide'
+  - alias kgs='kubectl get svc -A'
+  - alias kgd='kubectl get deployment -A'
+  - alias kgname='kubectl get namespace -A'
+  - alias kd='kubectl describe'
+  - alias argopass='kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo'

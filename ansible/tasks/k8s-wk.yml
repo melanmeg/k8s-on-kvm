@@ -1,0 +1,19 @@
+- name: Copy common.sh
+  copy:
+    src: "./files/k8s/common.sh"
+    dest: ~/
+    mode: '0755'
+
+- name: Copy join_kubeadm_wk.yaml
+  copy:
+    src: "{{ item }}"
+    dest: ~/
+    mode: '0755'
+  with_fileglob:
+  - "/root/work/ansible/files/k8s/fetch/join_kubeadm_wk.yaml"
+
+- name: Execute common.sh
+  shell: bash ~/common.sh
+
+- name: Execute join
+  shell: kubeadm join --config ~/join_kubeadm_wk.yaml

@@ -1,0 +1,19 @@
+- name: Purge the package "needrestart"
+  apt:
+    name: needrestart
+    state: absent
+    purge: true
+    autoremove: yes
+
+- name: Set timezone to Asia/Tokyo
+  community.general.timezone:
+    name: Asia/Tokyo
+  become: true
+
+- name: mirror set riken
+  shell: sudo sed -i.bak -r 's!http://(security|us.archive).ubuntu.com/ubuntu!http://ftp.riken.jp/Linux/ubuntu!' /etc/apt/sources.list
+
+- name: Update Upgrade
+  apt:
+    upgrade: yes
+    update_cache: true
