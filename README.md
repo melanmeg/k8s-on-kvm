@@ -2,8 +2,8 @@
 
 ### MachineInfo
 - common info
-  - User         user
-  - IdentityFile ~/.ssh/id_ed25519
+    User         user
+    IdentityFile ~/.ssh/id_ed25519
 
 ```
 Host k8s-cp-1
