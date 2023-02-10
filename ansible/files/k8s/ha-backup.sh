@@ -32,7 +32,7 @@ defaults
   errorfile 503 /etc/haproxy/errors/503.http
   errorfile 504 /etc/haproxy/errors/504.http
 frontend k8s-api
-  bind ${KUBE_API_SERVER_VIP}:6443
+  bind ${KUBE_API_SERVER_VIP}:8443
   mode tcp
   option tcplog
   default_backend k8s-api
@@ -84,6 +84,9 @@ vrrp_instance LB_VIP {
   }
 }
 EOF
+
+systemctl restart keepalived
+systemctl restart haproxy
 
 systemctl enable keepalived --now
 systemctl enable haproxy --now
