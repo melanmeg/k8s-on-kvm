@@ -3,6 +3,8 @@ set -eu
 
 TARGET_BRANCH=main
 KUBE_API_SERVER_VIP=192.168.11.100
+NFS_SERVER_IP=192.168.11.99
+NFS_SERVER_PATH=/mnt/nfsshare
 # Use one minor version before the latest.
 KUBE_VERSION=1.25.6
 
@@ -75,6 +77,9 @@ helm install argocd argo/argocd-apps \
     --version 0.0.7 \
     --values https://raw.githubusercontent.com/megutamago/k8s-on-kvm/"${TARGET_BRANCH}"/k8s-manifests/argocd-apps-helm-chart-values.yaml
 
+# NFS Add
+helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+helm install nfs-client -n kube-system --set nfs.server=${NFS_SERVER_IP} --set nfs.path=${NFS_SERVER_PATH} nfs-subdir-external-provisioner/nfs-subdir-external-provisioner
 
 KUBEADM_UPLOADED_CERTS=$(kubeadm init phase upload-certs --upload-certs | tail -n 1)
 
