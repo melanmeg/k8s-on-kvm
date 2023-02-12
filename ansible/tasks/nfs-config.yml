@@ -4,6 +4,12 @@
     - nfs-kernel-server
     - nfs-common
 
+- name: Create folder smb
+  file:
+    path: "/mnt/share"
+    state: directory
+    mode: "777"
+
 - name: set idmapd
   lineinfile:
     dest: /etc/idmapd.conf
@@ -22,12 +28,6 @@
 
 - name: mount
   shell: mount -a
-
-- name: Create folder smb
-  file:
-    path: "/mnt/share"
-    state: directory
-    mode: "777"
 
 - name: Enabled and Restarted nfs
   systemd:
