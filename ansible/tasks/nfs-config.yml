@@ -1,0 +1,37 @@
+- name: Install the package
+  apt:
+    name:
+    - nfs-kernel-server
+    - nfs-common
+
+- name: set idmapd
+  lineinfile:
+    dest: /etc/idmapd.conf
+    insertafter: EOF
+    line: '{{ item }}'
+  with_items:
+  - '/mnt/share 192.168.0.0/16(rw,no_root_squash)'
+
+- name: set fstab
+  lineinfile:
+    dest: /etc/fstab
+    insertafter: EOF
+    line: '{{ item }}'
+  with_items:
+  - '192.168.11.99:/mnt/nfsshare /mnt/share nfs defaults 0 0'
+
+- name: mount
+  shell: mount -a
+
+- name: Create folder smb
+  file:
+    path: "/mnt/share"
+    state: directory
+    mode: "777"
+
+- name: Enabled and Restarted nfs
+  systemd:
+    name: nfs-server
+    state: restarted
+    enabled: yes
+  ignore_errors: yes
