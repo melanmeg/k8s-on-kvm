@@ -59,6 +59,8 @@
   - alias kgpw='kubectl get pod -A -o wide'
   - alias kgs='kubectl get svc -A'
   - alias kgd='kubectl get deployment -A'
+  - alias kgstate='kubectl get statefulset -A'
+  - alias kgsc='kubectl get storageclass -A'
   - alias kgname='kubectl get namespace -A'
   - alias kd='kubectl apply -k ./'
   - alias kd='kubectl describe'
