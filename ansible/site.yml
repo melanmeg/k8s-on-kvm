@@ -7,7 +7,8 @@
   tasks:
     - import_tasks : ./tasks/common.yml
     - import_tasks : ./tasks/nfs-config.yml
-    #- import_tasks : ./tasks/k8s-cp.yml
+    - import_tasks : ./tasks/k8s-cp.yml
+    #- import_tasks : ./tasks/helm.yml
 
 - name: k8s-cp-join
   hosts: k8s_cp_join

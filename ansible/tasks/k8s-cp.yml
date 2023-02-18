@@ -16,12 +16,6 @@
     dest: ~/work/
     mode: '0755'
 
-- name: Copy helm.sh
-  copy:
-    src: "./files/k8s/helm.sh"
-    dest: ~/work/
-    mode: '0755'
-
 # ----------------------------- #
 
 - name: Execute ha-master.sh
@@ -32,9 +26,6 @@
 
 - name: Execute setup.sh
   shell: bash ~/work/setup.sh
-
-- name: Execute helm.sh
-  shell: bash ~/work/helm.sh
 
 # ----------------------------- #
 
