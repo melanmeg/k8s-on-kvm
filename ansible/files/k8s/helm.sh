@@ -3,7 +3,7 @@ set -eu
 
 TARGET_BRANCH=main
 KUBE_API_SERVER_VIP=192.168.11.100
-NFS_SERVER_IP=192.168.11.111
+NFS_SERVER_IP=192.168.11.99
 NFS_SERVER_PATH=/mnt/share
 
 helm repo add argo https://argoproj.github.io/argo-helm
