@@ -25,7 +25,7 @@
     insertafter: EOF
     line: '{{ item }}'
   with_items:
-  - '192.168.11.99:/mnt/nfsshare /mnt/share nfs defaults 0 0'
+  - '192.168.11.99:/mnt/nfsshare/k8s/share /mnt/share nfs defaults 0 0'
 
 - name: mount
   shell: mount -a
