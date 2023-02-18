@@ -1,5 +1,20 @@
 # k8s-on-kvm
 
+aa
+### Prerequiremanets
+- kvm
+- ansible
+
+### Usage
+```
+# vm deploy
+./deploy.sh
+
+# ansible 
+ansible-playbook -i hosts site.yml
+ansible-playbook -i hosts site.yml -C
+```
+
 ### MachineInfo
 ```
 # common info
