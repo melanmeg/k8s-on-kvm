@@ -60,6 +60,7 @@
   - alias kgs='kubectl get svc -A'
   - alias kgd='kubectl get deployment -A'
   - alias kgname='kubectl get namespace -A'
+  - alias kd='kubectl apply -k ./'
   - alias kd='kubectl describe'
   - alias kds='kubectl describe storageclass'
   - alias argopass='kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo'

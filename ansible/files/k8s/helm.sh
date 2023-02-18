@@ -17,5 +17,5 @@ helm install argocd argo/argocd-apps \
     --values https://raw.githubusercontent.com/megutamago/k8s-on-kvm/"${TARGET_BRANCH}"/k8s-manifests/argocd-apps-helm-chart-values.yaml
 
 # NFS Add
-helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-helm install nfs-client -n kube-system --set nfs.server=${NFS_SERVER_IP} --set nfs.path=${NFS_SERVER_PATH} nfs-subdir-external-provisioner/nfs-subdir-external-provisioner
+#helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+#helm install nfs-client -n kube-system --set nfs.server=${NFS_SERVER_IP} --set nfs.path=${NFS_SERVER_PATH} nfs-subdir-external-provisioner/nfs-subdir-external-provisioner
