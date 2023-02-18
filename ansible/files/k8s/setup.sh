@@ -3,8 +3,6 @@ set -eu
 
 TARGET_BRANCH=main
 KUBE_API_SERVER_VIP=192.168.11.100
-NFS_SERVER_IP=192.168.11.111
-NFS_SERVER_PATH=/mnt/share
 # Use one minor version before the latest.
 KUBE_VERSION=1.25.6
 
@@ -56,6 +54,15 @@ kubeadm init --config ~/init_kubeadm.yaml --skip-phases=addon/kube-proxy
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
+
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+helm repo add cilium https://helm.cilium.io/
+helm install cilium cilium/cilium \
+    --namespace kube-system \
+    --set kubeProxyReplacement=strict \
+    --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
+    --set k8sServicePort=8443
 
 KUBEADM_UPLOADED_CERTS=$(kubeadm init phase upload-certs --upload-certs | tail -n 1)
 

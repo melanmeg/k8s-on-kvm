@@ -6,15 +6,6 @@ KUBE_API_SERVER_VIP=192.168.11.100
 NFS_SERVER_IP=192.168.11.111
 NFS_SERVER_PATH=/mnt/share
 
-curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-
-helm repo add cilium https://helm.cilium.io/
-helm install cilium cilium/cilium \
-    --namespace kube-system \
-    --set kubeProxyReplacement=strict \
-    --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
-    --set k8sServicePort=8443
-
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd \
     --version 5.19.14 \
