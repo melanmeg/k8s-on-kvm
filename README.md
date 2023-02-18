@@ -1,6 +1,5 @@
 # k8s-on-kvm
 
-aa
 ### Prerequiremanets
 - kvm
 - ansible
