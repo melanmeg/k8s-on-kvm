@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-TARGET_BRANCH=main
+TARGET_BRANCH=test
 KUBE_API_SERVER_VIP=192.168.11.100
 # Use one minor version before the latest.
 KUBE_VERSION=1.25.6
