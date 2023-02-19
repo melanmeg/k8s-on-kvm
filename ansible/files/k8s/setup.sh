@@ -8,8 +8,6 @@ KUBE_VERSION=1.25.6
 
 kubeadm config images pull
 
-wget https://github.com/derailed/k9s/releases/download/v0.26.7/k9s_Linux_x86_64.tar.gz -O - | tar -zxvf - k9s && sudo mv ./k9s /usr/local/bin/
-
 KUBEADM_BOOTSTRAP_TOKEN=$(openssl rand -hex 3).$(openssl rand -hex 8)
 
 cat > ~/init_kubeadm.yaml <<EOF
@@ -30,7 +28,7 @@ networking:
   serviceSubnet: "10.96.0.0/16"
   podSubnet: "10.128.0.0/16"
 kubernetesVersion: "v${KUBE_VERSION}"
-controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:8443"
+controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:6443"
 apiServer:
   extraArgs:
     feature-gates: "DelegateFSGroupToCSIDriver=false"
@@ -63,7 +61,7 @@ helm install cilium cilium/cilium \
     --namespace kube-system \
     --set kubeProxyReplacement=strict \
     --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
-    --set k8sServicePort=8443
+    --set k8sServicePort=6443
 
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd \
@@ -89,7 +87,7 @@ nodeRegistration:
   criSocket: "/var/run/containerd/containerd.sock"
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:8443"
+    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:6443"
     token: "$KUBEADM_BOOTSTRAP_TOKEN"
     unsafeSkipCAVerification: true
 controlPlane:
@@ -108,7 +106,7 @@ nodeRegistration:
   criSocket: "/var/run/containerd/containerd.sock"
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:8443"
+    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:6443"
     token: "$KUBEADM_BOOTSTRAP_TOKEN"
     unsafeSkipCAVerification: true
 EOF
