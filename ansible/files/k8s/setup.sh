@@ -57,7 +57,6 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 
 helm repo add cilium https://helm.cilium.io/
 helm install cilium cilium/cilium \
-    --version 1.12.7 \
     --namespace kube-system \
     --set kubeProxyReplacement=strict \
     --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
