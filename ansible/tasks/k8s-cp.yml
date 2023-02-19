@@ -1,9 +1,3 @@
-- name: Copy ha-master.sh
-  copy:
-    src: "./files/k8s/ha-master.sh"
-    dest: ~/work/
-    mode: '0755'
-
 - name: Copy common.sh
   copy:
     src: "./files/k8s/common.sh"
@@ -17,9 +11,6 @@
     mode: '0755'
 
 # ----------------------------- #
-
-- name: Execute ha-master.sh
-  shell: bash ~/work/ha-master.sh
 
 - name: Execute common.sh
   shell: bash ~/work/common.sh

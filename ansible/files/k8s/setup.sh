@@ -2,7 +2,7 @@
 set -eu
 
 TARGET_BRANCH=test
-KUBE_API_SERVER_VIP=192.168.11.100
+KUBE_API_SERVER_VIP=192.168.11.111
 # Use one minor version before the latest.
 KUBE_VERSION=1.25.6
 
