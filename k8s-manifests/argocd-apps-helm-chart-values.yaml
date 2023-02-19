@@ -7,7 +7,7 @@ applications:
     project: argocd-root
     source:
       repoURL: https://github.com/megutamago/k8s-on-kvm
-      targetRevision: main
+      targetRevision: dev
       path: k8s-manifests/apps/root
     destination:
       server: https://kubernetes.default.svc
