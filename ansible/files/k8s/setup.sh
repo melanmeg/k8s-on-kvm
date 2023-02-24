@@ -57,6 +57,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 
 helm repo add cilium https://helm.cilium.io/
 helm install cilium cilium/cilium \
+    --version 1.13.0 \
     --namespace kube-system \
     --set kubeProxyReplacement=strict \
     --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
@@ -64,12 +65,12 @@ helm install cilium cilium/cilium \
 
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd \
-    --version 5.5.4 \
+    --version 5.19.14 \
     --create-namespace \
     --namespace argocd \
     --values https://raw.githubusercontent.com/megutamago/k8s-on-kvm/"${TARGET_BRANCH}"/k8s-manifests/argocd-helm-chart-values.yaml
 helm install argocd argo/argocd-apps \
-    --version 0.0.1 \
+    --version 0.0.7 \
     --values https://raw.githubusercontent.com/megutamago/k8s-on-kvm/"${TARGET_BRANCH}"/k8s-manifests/argocd-apps-helm-chart-values.yaml
 
 KUBEADM_UPLOADED_CERTS=$(kubeadm init phase upload-certs --upload-certs | tail -n 1)
