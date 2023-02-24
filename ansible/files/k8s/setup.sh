@@ -2,11 +2,13 @@
 set -eu
 
 TARGET_BRANCH=test
-KUBE_API_SERVER_VIP=192.168.11.111
+KUBE_API_SERVER_VIP=192.168.11.100
 # Use one minor version before the latest.
 KUBE_VERSION=1.25.6
 
 kubeadm config images pull
+
+wget https://github.com/derailed/k9s/releases/download/v0.26.7/k9s_Linux_x86_64.tar.gz -O - | tar -zxvf - k9s && sudo mv ./k9s /usr/local/bin/
 
 KUBEADM_BOOTSTRAP_TOKEN=$(openssl rand -hex 3).$(openssl rand -hex 8)
 
