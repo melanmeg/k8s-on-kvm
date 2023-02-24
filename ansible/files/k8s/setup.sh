@@ -64,12 +64,12 @@ helm install cilium cilium/cilium \
 
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd \
-    --version 5.19.14 \
+    --version 5.5.4 \
     --create-namespace \
     --namespace argocd \
     --values https://raw.githubusercontent.com/megutamago/k8s-on-kvm/"${TARGET_BRANCH}"/k8s-manifests/argocd-helm-chart-values.yaml
 helm install argocd argo/argocd-apps \
-    --version 0.0.7 \
+    --version 0.0.1 \
     --values https://raw.githubusercontent.com/megutamago/k8s-on-kvm/"${TARGET_BRANCH}"/k8s-manifests/argocd-apps-helm-chart-values.yaml
 
 KUBEADM_UPLOADED_CERTS=$(kubeadm init phase upload-certs --upload-certs | tail -n 1)
