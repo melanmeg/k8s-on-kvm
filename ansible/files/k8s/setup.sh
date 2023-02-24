@@ -28,7 +28,7 @@ networking:
   serviceSubnet: "10.96.0.0/16"
   podSubnet: "10.128.0.0/16"
 kubernetesVersion: "v${KUBE_VERSION}"
-controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:6443"
+controlPlaneEndpoint: "${KUBE_API_SERVER_VIP}:8443"
 apiServer:
   extraArgs:
     feature-gates: "DelegateFSGroupToCSIDriver=false"
@@ -61,7 +61,7 @@ helm install cilium cilium/cilium \
     --namespace kube-system \
     --set kubeProxyReplacement=strict \
     --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
-    --set k8sServicePort=6443
+    --set k8sServicePort=8443
 
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd \
@@ -87,7 +87,7 @@ nodeRegistration:
   criSocket: "/var/run/containerd/containerd.sock"
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:6443"
+    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:8443"
     token: "$KUBEADM_BOOTSTRAP_TOKEN"
     unsafeSkipCAVerification: true
 controlPlane:
@@ -106,7 +106,7 @@ nodeRegistration:
   criSocket: "/var/run/containerd/containerd.sock"
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:6443"
+    apiServerEndpoint: "${KUBE_API_SERVER_VIP}:8443"
     token: "$KUBEADM_BOOTSTRAP_TOKEN"
     unsafeSkipCAVerification: true
 EOF
