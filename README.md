@@ -1,5 +1,8 @@
 # k8s-on-kvm
 
+### Server
+OS: Ubuntu22.04
+
 ### Prerequiremanets
 - kvm
 - ansible
