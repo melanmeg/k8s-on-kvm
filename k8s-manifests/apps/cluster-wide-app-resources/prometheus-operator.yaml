@@ -44,31 +44,6 @@ spec:
             kubeProxy: false
         grafana:
           defaultDashboardsTimezone: Asia/Tokyo
-          plugins:
-            - grafana-piechart-panel
-          grafana.ini:
-            server:
-              domain: localhost
-              root_url: '%(protocol)s://%(domain)s:%(http_port)s'
-              enforce_domain: false
-            log:
-              level: warn
-            date_formats:
-              default_timezone: Asia/Tokyo
-            security:
-              cookie_secure: false
-              strict_transport_security: true
-              content_security_policy: true
-          securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
-            fsGroup: 472
-          deploymentStrategy:
-            type: Recreate
-          persistence:
-            enabled: true
-            size: 10Gi
         prometheus:
           prometheusSpec:
             storageSpec:
