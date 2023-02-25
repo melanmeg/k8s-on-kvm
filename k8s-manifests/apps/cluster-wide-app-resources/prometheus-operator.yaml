@@ -81,17 +81,6 @@ spec:
                   type: loki
                   url: http://loki:3100
                   isDefault: false
-        kubeProxy:
-          enabled: false
-        kubeEtcd:
-          endpoints:
-            - 192.168.11.111
-            - 192.168.11.112
-            - 192.168.11.113
-          service:
-            enabled: true
-            port: 2381
-            targetPort: 2381
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
