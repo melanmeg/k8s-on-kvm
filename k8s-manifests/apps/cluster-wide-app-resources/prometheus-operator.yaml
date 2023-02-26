@@ -44,11 +44,6 @@ spec:
             kubeProxy: false
         grafana:
           defaultDashboardsTimezone: Asia/Tokyo
-          adminPassword: prom-operator
-        service:
-          portName: http-web
-        serviceMonitor:
-          path: "/metrics"
         prometheus:
           prometheusSpec:
             storageSpec:
@@ -56,15 +51,7 @@ spec:
                 spec:
                   resources:
                     requests:
-                      storage: 50Gi
-            resources:
-              requests:
-                memory: 2Gi
-            securityContext:
-              runAsGroup: 0
-              runAsNonRoot: false
-              runAsUser: 0
-              fsGroup: 2000
+                      storage: 5Gi
         alertmanager:
           alertmanagerSpec:
             storage:
@@ -72,23 +59,7 @@ spec:
                 spec:
                   resources:
                     requests:
-                      storage: 20Gi
-            securityContext:
-              runAsGroup: 0
-              runAsNonRoot: false
-              runAsUser: 0
-              fsGroup: 2000
-        kubeProxy:
-          enabled: false
-        kubeEtcd:
-          endpoints:
-            - 192.168.11.111
-            - 192.168.11.112
-            - 192.168.11.113
-          service:
-            enabled: true
-            port: 2381
-            targetPort: 2381
+                      storage: 2Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
