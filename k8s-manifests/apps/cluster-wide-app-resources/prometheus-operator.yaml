@@ -44,18 +44,40 @@ spec:
             kubeProxy: false
         grafana:
           defaultDashboardsTimezone: Asia/Tokyo
-          plugins:
-            - grafana-piechart-panel
-          grafana.ini:
-            log:
-              level: warn
-            date_formats:
-              default_timezone: Asia/Tokyo
-          deploymentStrategy:
-            type: Recreate
-          persistence:
-            enabled: true
-            size: 10Gi
+          adminPassword: prom-operator
+        service:
+          portName: http-web
+        serviceMonitor:
+          path: "/metrics"
+        prometheus:
+          prometheusSpec:
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  resources:
+                    requests:
+                      storage: 50Gi
+            resources:
+              requests:
+                memory: 2Gi
+            securityContext:
+              runAsGroup: 0
+              runAsNonRoot: false
+              runAsUser: 0
+              fsGroup: 2000
+        alertmanager:
+          alertmanagerSpec:
+            storage:
+              volumeClaimTemplate:
+                spec:
+                  resources:
+                    requests:
+                      storage: 20Gi
+            securityContext:
+              runAsGroup: 0
+              runAsNonRoot: false
+              runAsUser: 0
+              fsGroup: 2000
         kubeProxy:
           enabled: false
         kubeEtcd:
