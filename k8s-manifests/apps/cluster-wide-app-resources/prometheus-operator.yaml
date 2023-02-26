@@ -44,6 +44,18 @@ spec:
             kubeProxy: false
         grafana:
           defaultDashboardsTimezone: Asia/Tokyo
+          plugins:
+            - grafana-piechart-panel
+          grafana.ini:
+            log:
+              level: warn
+            date_formats:
+              default_timezone: Asia/Tokyo
+          deploymentStrategy:
+            type: Recreate
+          persistence:
+            enabled: true
+            size: 10Gi
         kubeProxy:
           enabled: false
         kubeEtcd:
