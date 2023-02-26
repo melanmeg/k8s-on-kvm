@@ -6,6 +6,7 @@
   max_fail_percentage: 0
   tasks:
     - import_tasks : ./tasks/common.yml
+    - import_tasks : ./tasks/apt-key_gpg.yml
     - import_tasks : ./tasks/nfs-config.yml
     - import_tasks : ./tasks/k8s-cp.yml
 
@@ -17,6 +18,7 @@
   max_fail_percentage: 0
   tasks:
     #- import_tasks : ./tasks/common.yml
+    #- import_tasks : ./tasks/apt-key_gpg.yml
     #- import_tasks : ./tasks/k8s-cp-join.yml
 
 - name: k8s-wk
@@ -27,4 +29,5 @@
   max_fail_percentage: 0
   tasks:
     - import_tasks : ./tasks/common.yml
+    - import_tasks : ./tasks/apt-key_gpg.yml
     - import_tasks : ./tasks/k8s-wk.yml
