@@ -54,17 +54,11 @@ spec:
             storageSpec:
               volumeClaimTemplate:
                 spec:
+                  storageClassName: nfs-share
+                  accessModes: ["ReadWriteOnce"]
                   resources:
                     requests:
                       storage: 50Gi
-        alertmanager:
-          alertmanagerSpec:
-            storage:
-              volumeClaimTemplate:
-                spec:
-                  resources:
-                    requests:
-                      storage: 20Gi
         kubeProxy:
           enabled: false
         kubeEtcd:
