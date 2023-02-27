@@ -6,8 +6,8 @@ metadata:
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: k8s-sigs.io/nfs-subdir-external-provisioner
 parameters:
-  server: 192.168.11.111
-  path: /mnt/share
+  server: 192.168.11.99
+  path: /mnt/nfsshare/k8s/share
   readOnly: "false"
 reclaimPolicy: Retain
 allowVolumeExpansion: true

@@ -4,15 +4,15 @@
     - nfs-kernel-server
     - nfs-common
 
-- name: Create folder smb
+- name: Create folder
   file:
     path: "/mnt/share"
     state: directory
     mode: "777"
 
-- name: set idmapd
+- name: set /etc/exports
   lineinfile:
-    dest: /etc/idmapd.conf
+    dest: /etc/exports
     insertafter: EOF
     line: '{{ item }}'
   with_items:
