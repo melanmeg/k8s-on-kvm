@@ -15,7 +15,7 @@ spec:
       values:
   destination:
     server: https://kubernetes.default.svc
-    namespace: logs
+    namespace: elastic-system
   syncPolicy:
     automated:
       prune: true
@@ -28,8 +28,6 @@ kind: Application
 metadata:
   name: eck-operator
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   project: cluster-wide-apps
   source:
@@ -41,7 +39,7 @@ spec:
       skipCrds: true
       values: |
         installCRDs: false
-        managedNamespaces: ["logs"]
+        managedNamespaces: ["elastic-system"]
         createClusterScopedResources: false
         webhook:
           enabled: false
@@ -49,7 +47,7 @@ spec:
           validateStorageClass: false
   destination:
     server: https://kubernetes.default.svc
-    namespace: logs
+    namespace: elastic-system
   syncPolicy:
     automated:
       prune: true
