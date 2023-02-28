@@ -7,7 +7,7 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/megutamago/k8s-on-kvm
-        revision: test
+        revision: main
         directories:
           - path: k8s-manifests/apps/cluster-wide-apps/*
   template:
@@ -19,7 +19,7 @@ spec:
       project: cluster-wide-apps
       source:
         repoURL: https://github.com/megutamago/k8s-on-kvm
-        targetRevision: test
+        targetRevision: main
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc
@@ -49,7 +49,7 @@ spec:
   project: argocd-root
   source:
     repoURL: https://github.com/megutamago/k8s-on-kvm
-    targetRevision: test
+    targetRevision: main
     path: k8s-manifests/apps/cluster-wide-app-resources
   destination:
     server: https://kubernetes.default.svc
