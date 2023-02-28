@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: eck-operator-crds
+  namespace: argocd
+spec:
+  project: cluster-wide-apps
+  source:
+    chart: eck-operator-crds
+    repoURL: https://helm.elastic.co
+    targetRevision: 2.6.1
+    helm:
+      releaseName: eck-operator-crds
+      skipCrds: true
+      values:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: logs
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+    - Replace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: eck-operator
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  project: cluster-wide-apps
+  source:
+    chart: eck-operator
+    repoURL: https://helm.elastic.co
+    targetRevision: 2.6.1
+    helm:
+      releaseName: eck-operator
+      skipCrds: true
+      values: |
+        installCRDs: false
+        managedNamespaces: ["logs"]
+        createClusterScopedResources: false
+        webhook:
+          enabled: false
+        config:
+          validateStorageClass: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: logs
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
