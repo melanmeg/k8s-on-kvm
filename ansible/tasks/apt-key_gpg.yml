@@ -1,0 +1,10 @@
+- name: Copy apt-key.gpg
+  copy:
+    src: "./files/k8s/apt-key.gpg"
+    dest: ~/work/
+    mode: '0755'
+
+# ----------------------------- #
+
+- name: Execute apt-key.gpg
+  shell: mv ~/work/apt-key.gpg /etc/apt/keyrings/kubernetes-archive-keyring.gpg

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-TARGET_BRANCH=main
+TARGET_BRANCH=test
 KUBE_API_SERVER_VIP=192.168.11.100
 # Use one minor version before the latest.
 KUBE_VERSION=1.25.6
@@ -59,7 +59,7 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 
 helm repo add cilium https://helm.cilium.io/
 helm install cilium cilium/cilium \
-    --version 1.12.6 \
+    --version 1.13.0 \
     --namespace kube-system \
     --set kubeProxyReplacement=strict \
     --set k8sServiceHost=${KUBE_API_SERVER_VIP} \
