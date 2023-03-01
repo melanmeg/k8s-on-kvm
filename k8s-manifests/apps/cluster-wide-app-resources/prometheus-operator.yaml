@@ -58,10 +58,10 @@ spec:
                   accessModes: ["ReadWriteOnce"]
                   resources:
                     requests:
-                      storage: 50Gi
+                      storage: 20Gi
             resources:
               requests:
-                memory: 2Gi
+                memory: 1Gi
             securityContext:
               runAsGroup: 0
               runAsNonRoot: false
@@ -76,7 +76,7 @@ spec:
                   accessModes: ["ReadWriteOnce"]
                   resources:
                     requests:
-                      storage: 20Gi
+                      storage: 10Gi
             securityContext:
               runAsGroup: 0
               runAsNonRoot: false

@@ -19,10 +19,50 @@ spec:
           enabled: true
           annotations:
             eck.k8s.elastic.co/license: basic
+          fullnameOverride: elasticsearch
+          version: 8.5.0
+          nodeSets:
+          - name: default
+            count: 1
+            config:
+              node.store.allow_mmap: false
+            volumeClaimTemplates:
+            - metadata:
+                name: elasticsearch-data
+              spec:
+                accessModes:
+                - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 30Gi
         eck-kibana:
           enabled: true
           annotations:
             eck.k8s.elastic.co/license: basic
+          fullnameOverride: kibana
+          version: 8.5.0
+          spec:
+            count: 1
+            elasticsearchRef:
+              name: elasticsearch
+            http:
+              service:
+                spec:
+                  type: LoadBalancer
+            podTemplate:
+              spec:
+                containers:
+                - name: kibana
+                  env:
+                    - name: NODE_OPTIONS
+                      value: "--max-old-space-size=2048"
+                  resources:
+                    requests:
+                      memory: 1Gi
+                      cpu: 0.5
+                    limits:
+                      memory: 2.5Gi
+                      cpu: 2
   destination:
     server: https://kubernetes.default.svc
     namespace: elastic-system
