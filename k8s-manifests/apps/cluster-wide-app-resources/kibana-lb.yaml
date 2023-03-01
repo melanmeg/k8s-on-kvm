@@ -11,6 +11,6 @@ spec:
     targetPort: 5601
   selector:
     common.k8s.elastic.co/type: kibana
-    kibana.k8s.elastic.co/name: eck-stack-eck-kibana
+    kibana.k8s.elastic.co/name: kibana
   type: LoadBalancer
   loadBalancerIP: 192.168.11.143
