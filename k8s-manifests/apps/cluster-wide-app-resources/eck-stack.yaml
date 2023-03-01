@@ -30,11 +30,13 @@ spec:
             - metadata:
                 name: elasticsearch-data
               spec:
-                accessModes:
-                - ReadWriteOnce
+                storageClassName: nfs-share
+                accessModes: ["ReadWriteOnce"]
                 resources:
                   requests:
                     storage: 30Gi
+          network.host: 0.0.0.0
+          xpack.security.enabled: true
         eck-kibana:
           enabled: true
           annotations:
