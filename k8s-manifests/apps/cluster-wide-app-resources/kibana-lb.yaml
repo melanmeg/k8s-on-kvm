@@ -5,10 +5,14 @@ metadata:
   namespace: elastic-system
 spec:
   ports:
-  - name: http-web
+  - name: http
     port: 80
     protocol: TCP
-    targetPort: 5601
+    targetPort: server
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: server
   selector:
     common.k8s.elastic.co/type: kibana
     kibana.k8s.elastic.co/name: kibana

@@ -45,10 +45,6 @@ spec:
             count: 1
             elasticsearchRef:
               name: elasticsearch
-            http:
-              service:
-                spec:
-                  type: LoadBalancer
             podTemplate:
               spec:
                 containers:

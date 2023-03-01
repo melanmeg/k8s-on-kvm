@@ -5,7 +5,7 @@ metadata:
   namespace: elastic-system
 spec:
   ports:
-  - name: http-web
+  - name: elastic-port
     port: 9200
     protocol: TCP
     targetPort: 9200
