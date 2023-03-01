@@ -10,7 +10,7 @@ spec:
   source:
     chart: eck-stack
     repoURL: https://helm.elastic.co
-    targetRevision: 0.3.0
+    targetRevision: 0.3.0 # Supported versions: Kubernetes 1.21-1.25
     helm:
       releaseName: eck-stack
       skipCrds: true
