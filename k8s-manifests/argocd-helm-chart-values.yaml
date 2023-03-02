@@ -96,4 +96,5 @@ notifications:
 
 configs:
   secret:
-    argocdServerAdminPassword: "$2a$10$s.zZt8yiMHO6QqKcTHKxiOj1DF3MyStZJM0h3Yc14/SRWgy519aea"
+    argocdServerAdminPassword: "$2a$10$4IZX0huwNB4QNz4Yxr3LYuDfrtCwqkImzbftUFufj5ftQfcJ6zWuq"
+    # htpasswd -nbBC 10 "" admin | tr -d ':\n' | sed 's/$2y/$2a/'
