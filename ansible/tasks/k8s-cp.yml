@@ -72,3 +72,4 @@
   - '# grafana_password: prom-operator'
   - alias elasticpass='kubectl -n elastic-system get secret/elasticsearch-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 -d; echo'
   - '# Login authentication for kibana takes a long time. Try a few times.'
+  - '# kubectl get secrets -A'
