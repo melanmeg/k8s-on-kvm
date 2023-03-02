@@ -74,3 +74,5 @@
   - '# Login authentication for kibana takes a long time. Try a few times.'
   - '# kubectl get secrets -A'
   - '# kubectl get pod my-pod -o yaml'
+  - '# kubectl get certificate -A'
+  - '# kubeadm certs check-expiration'
