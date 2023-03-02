@@ -93,3 +93,7 @@ notifications:
     requests:
       cpu: 100m
       memory: 64Mi
+
+configs:
+  secret:
+    argocdServerAdminPassword: "$2a$10$s.zZt8yiMHO6QqKcTHKxiOj1DF3MyStZJM0h3Yc14/SRWgy519aea"
