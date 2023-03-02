@@ -21,6 +21,9 @@ spec:
             eck.k8s.elastic.co/license: basic
           fullnameOverride: elasticsearch
           version: 8.5.0
+          auth:
+            fileRealm:
+            - secretName: elastic-user
           nodeSets:
           - name: default
             count: 1
