@@ -25,7 +25,7 @@ spec:
           elasticsearch: false
   destination:
     server: https://kubernetes.default.svc
-    namespace: elastic-system
+    namespace: observability
   syncPolicy:
     automated:
       prune: true
