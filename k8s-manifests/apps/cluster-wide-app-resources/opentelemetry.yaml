@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: eck-operator-crds
+  name: opentelemetry-operator
   namespace: argocd
 spec:
   project: cluster-wide-apps
   source:
-    chart: eck-operator-crds
-    repoURL: https://helm.elastic.co
-    targetRevision: 2.6.1
+    chart: opentelemetry-operator
+    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+    targetRevision: 0.24.1
     helm:
-      releaseName: eck-operator-crds
+      releaseName: opentelemetry-operator
       skipCrds: true
       values:
   destination:
     server: https://kubernetes.default.svc
-    namespace: logging
+    namespace: tracing
   syncPolicy:
     automated:
       prune: true
@@ -26,28 +26,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: eck-operator
+  name: opentelemetry-collector
   namespace: argocd
 spec:
   project: cluster-wide-apps
   source:
-    chart: eck-operator
-    repoURL: https://helm.elastic.co
-    targetRevision: 2.6.1
+    chart: opentelemetry-collector
+    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+    targetRevision: 0.49.1
     helm:
-      releaseName: eck-operator
+      releaseName: opentelemetry-collector
       skipCrds: true
-      values: |
-        installCRDs: false
-        managedNamespaces: ["logging"]
-        createClusterScopedResources: false
-        webhook:
-          enabled: false
-        config:
-          validateStorageClass: false
+      values:
   destination:
     server: https://kubernetes.default.svc
-    namespace: logging
+    namespace: tracing
   syncPolicy:
     automated:
       prune: true

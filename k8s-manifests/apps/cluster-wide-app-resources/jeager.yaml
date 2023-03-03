@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jeager-operator
+  name: jaeger-operator
   namespace: argocd
 spec:
   project: cluster-wide-apps
   source:
-    chart: jeager-operator
+    chart: jaeger-operator
     repoURL: https://jaegertracing.github.io/helm-charts
     targetRevision: 2.40.0
     helm:
-      releaseName: jeager-operator
+      releaseName: jaeger-operator
       skipCrds: true
       values:
   destination:
@@ -26,7 +26,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jeager
+  name: jaeger
   namespace: argocd
 spec:
   project: cluster-wide-apps

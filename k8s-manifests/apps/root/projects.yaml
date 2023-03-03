@@ -18,9 +18,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: 'monitoring'
       server: https://kubernetes.default.svc
-    - namespace: 'elastic-system'
-      server: https://kubernetes.default.svc
-    - namespace: 'data-collector'
+    - namespace: 'logging'
       server: https://kubernetes.default.svc
     - namespace: 'tracing'
       server: https://kubernetes.default.svc
