@@ -13,6 +13,24 @@ spec:
       releaseName: opentelemetry-operator
       skipCrds: true
       values:
+        config:
+          receivers:
+            otlp:
+              protocols:
+                http:
+                  endpoint: demo.tracing.svc.cluster.local
+          processors:
+          exporters:
+            jaeger:
+             endpoint: jaeger-collector.tracing.svc.cluster.local:14250
+              tls:
+                insecure: true
+          service:
+            pipelines:
+              traces:
+                receivers: [otlp]
+                processors: []
+                exporters: [jaeger]
   destination:
     server: https://kubernetes.default.svc
     namespace: tracing

@@ -31,11 +31,11 @@ metadata:
 spec:
   project: cluster-wide-apps
   source:
-    chart: jeager
+    chart: jaeger
     repoURL: https://jaegertracing.github.io/helm-charts
     targetRevision: 0.67.6
     helm:
-      releaseName: jeager
+      releaseName: jaeger
       skipCrds: true
       values: |
         storage:
