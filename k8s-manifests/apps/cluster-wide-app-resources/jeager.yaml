@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jeager
+  namespace: argocd
+spec:
+  project: cluster-wide-apps
+  source:
+    chart: jeager
+    repoURL: https://jaegertracing.github.io/helm-charts
+    targetRevision: 0.67.6
+    helm:
+      releaseName: jeager
+      values: |
+        storage:
+          type: elasticsearch
+          elasticsearch:
+            host: 192.168.11.144
+            port: 9200
+            scheme: https
+            user: elastic
+            password: elastic
+        provisionDataStore:
+          cassandra: false
+          elasticsearch: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: elastic-system
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
