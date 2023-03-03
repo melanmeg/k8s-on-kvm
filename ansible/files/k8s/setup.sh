@@ -70,6 +70,7 @@ helm install argocd argo/argo-cd \
     --version 5.19.14 \
     --create-namespace \
     --namespace argocd \
+    --set server.extraArgs[0]="--insecure" \
     --values https://raw.githubusercontent.com/megutamago/k8s-on-kvm/"${TARGET_BRANCH}"/k8s-manifests/argocd-helm-chart-values.yaml
 helm install argocd argo/argocd-apps \
     --version 0.0.7 \
