@@ -67,3 +67,43 @@ spec:
         duration: 5s
         factor: 2
         maxDuration: 2m
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mytest-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/megutamago/k8s-on-kvm
+        revision: main
+        directories:
+          - path: k8s-manifests/apps/mytest/*
+  template:
+    metadata:
+      # 各Application が argocd namespace に配置されるため prefix した方が安全
+      name: "mytest-{{path.basenameNormalized}}"
+      namespace: argocd
+    spec:
+      project: mytest
+      source:
+        repoURL: https://github.com/megutamago/k8s-on-kvm
+        targetRevision: main
+        path: "{{path}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: my-test
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+          - CreateNamespace=true
+        retry:
+          limit: -1
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 2m
