@@ -43,7 +43,7 @@ spec:
           elasticsearch:
             host: 192.168.11.144
             port: 9200
-            scheme: https
+            scheme: http
             user: elastic
             password: elastic
         provisionDataStore:
