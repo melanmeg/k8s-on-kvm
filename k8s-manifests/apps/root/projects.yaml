@@ -22,7 +22,7 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: 'data-collector'
       server: https://kubernetes.default.svc
-    - namespace: 'observability'
+    - namespace: 'tracing'
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
