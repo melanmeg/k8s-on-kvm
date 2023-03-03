@@ -4,7 +4,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
   name: guestbook-ui
-  namespace: sample-app
+  namespace: guestbook
 spec:
   rules:
   - http:

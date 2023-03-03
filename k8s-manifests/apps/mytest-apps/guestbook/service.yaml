@@ -5,7 +5,7 @@ metadata:
   labels:
     app: guestbook-ui
   name: guestbook-ui
-  namespace: sample-app
+  namespace: guestbook
 spec:
   ports:
   - port: 3000
