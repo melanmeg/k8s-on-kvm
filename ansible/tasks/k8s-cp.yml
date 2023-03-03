@@ -76,3 +76,5 @@
   - '# kubectl get pod my-pod -o yaml'
   - '# kubectl get certificate -A'
   - '# kubeadm certs check-expiration'
+  - '# kustomize patches'
+  - '# kubectl edit...'
