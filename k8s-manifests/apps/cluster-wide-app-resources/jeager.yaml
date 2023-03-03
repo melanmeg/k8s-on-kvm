@@ -1,6 +1,31 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  name: jeager-operator
+  namespace: argocd
+spec:
+  project: cluster-wide-apps
+  source:
+    chart: jeager-operator
+    repoURL: https://jaegertracing.github.io/helm-charts
+    targetRevision: 2.40.0
+    helm:
+      releaseName: jeager-operator
+      skipCrds: true
+      values:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tracing
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+    - Replace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
   name: jeager
   namespace: argocd
 spec:
@@ -11,6 +36,7 @@ spec:
     targetRevision: 0.67.6
     helm:
       releaseName: jeager
+      skipCrds: true
       values: |
         storage:
           type: elasticsearch
@@ -25,7 +51,7 @@ spec:
           elasticsearch: false
   destination:
     server: https://kubernetes.default.svc
-    namespace: observability
+    namespace: tracing
   syncPolicy:
     automated:
       prune: true
