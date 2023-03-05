@@ -71,7 +71,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: mytest-apps
+  name: foo-test-apps
   namespace: argocd
 spec:
   generators:
@@ -79,14 +79,14 @@ spec:
         repoURL: https://github.com/megutamago/k8s-on-kvm
         revision: main
         directories:
-          - path: k8s-manifests/apps/mytest/*
+          - path: k8s-manifests/apps/foo-test/*
   template:
     metadata:
       # 各Application が argocd namespace に配置されるため prefix した方が安全
-      name: "mytest-{{path.basenameNormalized}}"
+      name: "foo-test-{{path.basenameNormalized}}"
       namespace: argocd
     spec:
-      project: mytest
+      project: foo-test
       source:
         repoURL: https://github.com/megutamago/k8s-on-kvm
         targetRevision: main
