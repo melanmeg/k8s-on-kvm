@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kibana
+  namespace: argocd
+spec:
+  project: cluster-wide-apps
+  source:
+    chart: kibana
+    repoURL: https://helm.elastic.co
+    targetRevision: 8.5.1
+    helm:
+      releaseName: kibana
+      skipCrds: true
+      values: |
+        replicas: 1
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "2GI"
+          limits:
+            cpu: "1000m"
+            memory: "2GI"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: logging
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+    - Replace=true
