@@ -44,7 +44,7 @@ spec:
             kubeProxy: false
         grafana:
           defaultDashboardsTimezone: Asia/Tokyo
-          adminPassword: prom-operator
+          adminPassword: grafana
         service:
           portName: http-web
         serviceMonitor:
