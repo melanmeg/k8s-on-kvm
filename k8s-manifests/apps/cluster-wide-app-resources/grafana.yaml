@@ -26,7 +26,7 @@ spec:
               maxLines: 1000
           - name: Tempo
             type: tempo
-            url: http://tempo-distributed.tracing:3200/
+            url: http://tempo-distributed-querier.tracing:3200/
             access: proxy
             jsonData:
               httpMethod: GET
