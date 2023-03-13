@@ -1,0 +1,37 @@
+piVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: foo-test
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: foo-test
+  labels:
+    app: nginx
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 80
+    nodePort: 30080
+    protocol: TCP
+  selector:
+    app: nginx

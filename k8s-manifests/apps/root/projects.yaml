@@ -20,14 +20,11 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: 'logging'
       server: https://kubernetes.default.svc
-    - namespace: 'observability'
+    - namespace: 'tracing'
       server: https://kubernetes.default.svc
-    # adding
     - namespace: 'cert-manager'
       server: https://kubernetes.default.svc
     - namespace: 'ingress-nginx'
-      server: https://kubernetes.default.svc
-    - namespace: 'emojivote'
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'
