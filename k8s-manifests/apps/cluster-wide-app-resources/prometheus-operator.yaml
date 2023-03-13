@@ -42,9 +42,6 @@ spec:
           create: true
           rules:
             kubeProxy: false
-        grafana:
-          defaultDashboardsTimezone: Asia/Tokyo
-          adminPassword: grafana
         service:
           portName: http-web
         serviceMonitor:
