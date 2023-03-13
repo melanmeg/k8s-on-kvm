@@ -20,7 +20,7 @@ spec:
             isDefault: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: grafana
+    namespace: grafana-system
   syncPolicy:
     automated:
       prune: true
