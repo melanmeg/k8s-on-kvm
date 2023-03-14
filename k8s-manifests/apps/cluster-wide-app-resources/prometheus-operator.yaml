@@ -46,6 +46,8 @@ spec:
           portName: http-web
         serviceMonitor:
           path: "/metrics"
+        grafana:
+          enabled: false
         prometheus:
           prometheusSpec:
             storageSpec:
