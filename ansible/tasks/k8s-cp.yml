@@ -79,4 +79,3 @@
   - '# kustomize patches'
   - '# kubectl edit...'
   - alias elasticpatch='kubectl patch secret elasticsearch-es-elastic-user -n logging -p='\''{"data":{"elastic":"ZWxhc3RpYw=="}}'\'''
-  - alias grafanapass='kubectl -n grafana-system get secret/xxxxxx-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo'
