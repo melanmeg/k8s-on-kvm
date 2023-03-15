@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  project: cluster-wide-apps
+  source:
+    chart: grafana
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 6.52.3
+    helm:
+      releaseName: grafana
+      values: |
+        datasources:
+          datasources1.yaml:
+            apiVersion: 1
+            datasources:
+            - name: Prometheus
+              type: prometheus
+              url: http://prometheus-kube-prometheus-prometheus.monitoring:9090/
+              access: proxy
+              jsonData:
+                httpMethod: POST
+                manageAlerts: true
+                prometheusType: Prometheus
+          datasources2.yaml:
+            apiVersion: 1
+            datasources:
+            - name: Loki
+              type: loki
+              url: http://loki-stack.logging:3100/
+              access: proxy
+              jsonData:
+                maxLines: 1000
+          datasources3.yaml:
+            apiVersion: 1
+            datasources:
+            - name: Tempo
+              type: tempo
+              url: http://tempo-distributed-query-frontend.tracing:3200/
+              access: proxy
+              jsonData:
+                httpMethod: GET
+                serviceMap:
+                  datasourceUid: 'Prometheus'
+                search:
+                  hide: false
+                nodeGraph:
+                  enabled: true
+                lokiSearch:
+                  datasourceUid: 'Loki'
+        dashboards:
+          default:
+            prometheus-stats:
+              gnetId: 2
+              revision: 2
+              datasource: Prometheus
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: grafana-system
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
