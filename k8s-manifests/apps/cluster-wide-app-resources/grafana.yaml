@@ -12,6 +12,9 @@ spec:
     helm:
       releaseName: grafana
       values: |
+        admin:
+          userKey: Z3JhZmFuYQ==
+          passwordKey: Z3JhZmFuYQ==
         datasources:
           datasources1.yaml:
             apiVersion: 1
@@ -58,7 +61,7 @@ spec:
               datasource: Prometheus
   destination:
     server: https://kubernetes.default.svc
-    namespace: grafana-system
+    namespace: grafana
   syncPolicy:
     automated:
       prune: true
