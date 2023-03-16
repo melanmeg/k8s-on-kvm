@@ -6,7 +6,7 @@ metadata:
 spec:
   project: cluster-wide-apps
   source:
-    chart: webui
+    chart: grafana
     repoURL: https://grafana.github.io/helm-charts
     targetRevision: 6.52.3
     helm:
