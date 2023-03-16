@@ -12,9 +12,6 @@ spec:
     helm:
       releaseName: webui
       values: |
-        admin:
-          userKey: Z3JhZmFuYQ==
-          passwordKey: Z3JhZmFuYQ==
         datasources:
           datasources1.yaml:
             apiVersion: 1
