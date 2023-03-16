@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana
+  name: webui
   namespace: argocd
 spec:
   project: cluster-wide-apps
   source:
-    chart: grafana
+    chart: webui
     repoURL: https://grafana.github.io/helm-charts
     targetRevision: 6.52.3
     helm:
-      releaseName: grafana
+      releaseName: webui
       values: |
         admin:
           userKey: Z3JhZmFuYQ==
@@ -32,7 +32,7 @@ spec:
             datasources:
             - name: Loki
               type: loki
-              url: http://loki-stack.logging:3100/
+              url: http://loki.logging:3100/
               access: proxy
               jsonData:
                 maxLines: 1000
@@ -61,7 +61,7 @@ spec:
               datasource: Prometheus
   destination:
     server: https://kubernetes.default.svc
-    namespace: grafana
+    namespace: webui
   syncPolicy:
     automated:
       prune: true
