@@ -22,6 +22,7 @@ spec:
           defaultClass: true
           allowVolumeExpansion: true
           accessModes: ReadWriteOnce
+          volumeBindingMode: WaitForFirstConsumer
         accessModes: ReadWriteMany
   destination:
     server: 'https://kubernetes.default.svc'
