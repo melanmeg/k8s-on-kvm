@@ -37,5 +37,3 @@ IP   192.168.11.122
 Host k8s-wk-3
 IP   192.168.11.123
 ```
-
-### ref: https://github.com/unchama/kube-cluster-on-proxmox
