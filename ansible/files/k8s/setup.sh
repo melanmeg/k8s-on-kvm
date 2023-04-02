@@ -74,6 +74,13 @@ helm install argocd argo/argo-cd \
 helm install argocd argo/argocd-apps \
     --version 0.0.7 \
     --values https://raw.githubusercontent.com/megutamago/k8s-on-kvm/"${TARGET_BRANCH}"/k8s-manifests/argocd-apps-helm-chart-values.yaml
+    
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+linkerd install --crds | kubectl apply -f -
+linkerd install | kubectl apply -f -
+linkerd viz install | kubectl apply -f -
+linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=collector.linkerd-jaeger:55678
 
 KUBEADM_UPLOADED_CERTS=$(kubeadm init phase upload-certs --upload-certs | tail -n 1)
 
