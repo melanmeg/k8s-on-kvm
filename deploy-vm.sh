@@ -98,6 +98,7 @@ runcmd:
   - apt purge -y needrestart
   - sed -i.bak -r 's!http://(security|archive).ubuntu.com/ubuntu!http://ftp.riken.go.jp/Linux/ubuntu!' /etc/apt/sources.list.d/ubuntu.sources
   - echo "set bell-style none" | tee -a /etc/inputrc
+  - chmod -x /etc/update-motd.d/*
 package_update: true
 package_upgrade: true
 EOF
