@@ -186,7 +186,7 @@ do
       sleep 5
     done
     echo "refresh known_hosts"
-    ssh-keygen -R %h && ssh-keyscan %h >> ~/.ssh/known_hosts
+    ssh-keygen -R "${vmsrvip}" && ssh-keyscan "${vmsrvip}" >> ~/.ssh/known_hosts
     echo "service ssh restarted"
     ssh -n melanmeg@"${vmsrvip}" 'sudo systemctl restart ssh'
   done
