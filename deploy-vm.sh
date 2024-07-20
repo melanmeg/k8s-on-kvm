@@ -95,7 +95,7 @@ users:
     passwd: \$6\$rounds=4096\$iLPqVWPhF9FMY3Le\$7ukCEP1NijC5n7/D/jccsOf5fnrPyuk03sI9A8uhHjhmiwu7tkbT7c80fTd6X5cbbM.itwCnj7tUGHT9rk6LO0
 timezone: Asia/Tokyo
 runcmd:
-  - apt purge -y
+  - apt purge -y needrestart
   - sed -i.bak -r 's!http://(security|archive).ubuntu.com/ubuntu!http://ftp.riken.go.jp/Linux/ubuntu!' /etc/apt/sources.list.d/ubuntu.sources
   - echo "set bell-style none" | tee -a /etc/inputrc
 package_update: true
