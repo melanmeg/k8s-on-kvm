@@ -4,6 +4,8 @@ set -euo pipefail
 
 cd `dirname $0`
 
+echo -e "\e[1;36m apply.sh started. \e[m"
+
 # region : set variables
 
 IMAGE_SIZE=50G
@@ -12,11 +14,11 @@ IMAGE_PATH=/var/kvm/images
 VM_LIST=(
     #vmid #vmname  #cpu #mem #vmsrvip
     "1001 k8s-cp-1 2    4096 192.168.11.111"
-    "1002 k8s-cp-2 2    4096 192.168.11.112"
-    "1003 k8s-cp-3 2    4096 192.168.11.113"
+    # "1002 k8s-cp-2 2    4096 192.168.11.112"
+    # "1003 k8s-cp-3 2    4096 192.168.11.113"
     "1101 k8s-wk-1 4    8192 192.168.11.121"
     "1102 k8s-wk-2 4    8192 192.168.11.122"
-    "1103 k8s-wk-3 4    8192 192.168.11.123"
+    # "1103 k8s-wk-3 4    8192 192.168.11.123"
 )
 
 if [ -z "$1" ]; then
@@ -89,19 +91,20 @@ users:
     shell: /bin/bash
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: sudo
-    chpasswd: {expire: False}
+    chpasswd:
+      expire: False
     lock_passwd: false
     ssh_import_id: gh:melanmeg
     passwd: \$6\$rounds=4096\$iLPqVWPhF9FMY3Le\$7ukCEP1NijC5n7/D/jccsOf5fnrPyuk03sI9A8uhHjhmiwu7tkbT7c80fTd6X5cbbM.itwCnj7tUGHT9rk6LO0
 timezone: Asia/Tokyo
 runcmd:
-  - apt purge -y needrestart
   - sed -i.bak -r 's!http://(security|archive).ubuntu.com/ubuntu!http://ftp.riken.go.jp/Linux/ubuntu!' /etc/apt/sources.list.d/ubuntu.sources
-  - echo "set bell-style none" | tee -a /etc/inputrc
-  - chmod -x /etc/update-motd.d/*
-  - systemctl restart ssh
-package_update: true
-package_upgrade: true
+  - apt update -y && apt upgrade -y
+  - apt purge -y needrestart
+  - echo "set bell-style none" | tee -a /etc/inputrc # Suppress beep sound
+  - chmod -x /etc/update-motd.d/* # Suppress login Log
+  - sed -i 's/^#PrintLastLog yes/PrintLastLog no/' /etc/ssh/sshd_config # Suppress last Log
+  - nc -l -p 12345
 EOF
 # ----- #
         # END irregular indent because heredoc
@@ -172,3 +175,20 @@ rm -f image.img
 
 # endregion
 
+# wait for runcmd
+for array in "${VM_INFO[@]}"
+do
+  echo "${array}" | while read -r vmid vmname cpu mem vmsrvip
+  do
+    echo "Waiting for runcmd to start..."
+    while ! nc -z -w5 "${vmsrvip}" 12345 > /dev/null 2>&1; do
+      echo "Waiting for runcmd on $vmsrvip:12345..."
+      sleep 5
+    done
+    echo "service ssh restarted"
+    ssh -n melanmeg@"${vmsrvip}" 'sudo systemctl restart ssh'
+  done
+done
+echo "HealthCheck OK."
+
+echo -e "\e[1;36m Install completed!!!! \e[m"
