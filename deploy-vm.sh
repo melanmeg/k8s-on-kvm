@@ -14,11 +14,11 @@ IMAGE_PATH=/var/kvm/images
 VM_LIST=(
     #vmid #vmname  #cpu #mem #vmsrvip
     "1001 k8s-cp-1 2    4096 192.168.11.111"
-    # "1002 k8s-cp-2 2    4096 192.168.11.112"
-    # "1003 k8s-cp-3 2    4096 192.168.11.113"
+    "1002 k8s-cp-2 2    4096 192.168.11.112"
+    "1003 k8s-cp-3 2    4096 192.168.11.113"
     "1101 k8s-wk-1 4    8192 192.168.11.121"
     "1102 k8s-wk-2 4    8192 192.168.11.122"
-    # "1103 k8s-wk-3 4    8192 192.168.11.123"
+    "1103 k8s-wk-3 4    8192 192.168.11.123"
 )
 
 if [ -z "$1" ]; then
@@ -186,7 +186,7 @@ do
       sleep 5
     done
     echo "refresh known_hosts"
-    ssh-keygen -R "${vmsrvip}" && ssh-keyscan "${vmsrvip}" >> ~/.ssh/known_hosts
+    ssh-keygen -R "${vmsrvip}" > /dev/null 2>&1 && ssh-keyscan "${vmsrvip}" >> ~/.ssh/known_hosts 2>/dev/null
     echo "service ssh restarted"
     ssh -n melanmeg@"${vmsrvip}" 'sudo systemctl restart ssh'
   done
