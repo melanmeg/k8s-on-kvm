@@ -99,7 +99,7 @@ users:
 timezone: Asia/Tokyo
 runcmd:
   - sed -i.bak -r 's!http://(security|archive).ubuntu.com/ubuntu!http://ftp.riken.go.jp/Linux/ubuntu!' /etc/apt/sources.list.d/ubuntu.sources
-  - apt update -y && apt upgrade -y
+  - apt upgrade -yU
   - apt purge -y needrestart
   - echo "set bell-style none" | tee -a /etc/inputrc # Suppress beep sound
   - chmod -x /etc/update-motd.d/* # Suppress login Log
